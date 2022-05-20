@@ -1,0 +1,263 @@
+openapi: 3.0.3
+info:
+  title: Contact Service API
+  description: API that allows to perform CRUD operations for contact information stored in a DB.
+  contact:
+    name: Andreas Krause
+  license:
+    name: Demo
+  version: '1.0'
+servers:
+  - url: http://localhost:8080
+    description: Inferred Url
+tags:
+  - name: contact-api
+    description: Contact Api
+paths:
+  /api/v1/person:
+    get:
+      tags:
+        - contact-api
+      summary: Get Person List
+      description: This function retrieves all persons from the Database.
+      operationId: findAllUsingGET
+      parameters:
+        - name: page
+          in: query
+          description: page
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: size
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+    post:
+      tags:
+        - contact-api
+      summary: Create Person
+      description: This function creates a new person entry on the DB.Externally supplied ids are ignored.
+      operationId: createUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Person'
+    delete:
+      tags:
+        - contact-api
+      summary: Delete all Persons in DB
+      description: This function deletes all persons from the database.
+      operationId: deleteAllUsingDELETE
+      responses:
+        '204':
+          description: No Content
+  /api/v1/person/count:
+    get:
+      tags:
+        - contact-api
+      summary: Number of Persons
+      description: This function retrieves the amount of persons contained in the database
+      operationId: countUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int64
+  /api/v1/person/search:
+    post:
+      tags:
+        - contact-api
+      summary: Search for People
+      description: This function performs a people search in the database, and returns the persons that meet the criteria specified in the request.
+      operationId: searchUsingPOST
+      parameters:
+        - name: page
+          in: query
+          description: page
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: size
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+  /api/v1/person/{id}:
+    get:
+      tags:
+        - contact-api
+      summary: Read Person by ID
+      description: This function reads a single person from the database.
+      operationId: readUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Person'
+    put:
+      tags:
+        - contact-api
+      summary: Update Person
+      description: This function updates a person from on the database. This does not support delta updates.
+      operationId: upsertUsingPUT
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Person'
+    delete:
+      tags:
+        - contact-api
+      summary: Delete Person by ID
+      description: This function deletes a person from the database.
+      operationId: deleteUsingDELETE
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+    patch:
+      tags:
+        - contact-api
+      summary: Update Person
+      description: This function updates a person from on the database. This does support delta updates.
+      operationId: deltaUpdateUsingPATCH
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Person'
+components:
+  schemas:
+    Person:
+      title: Person
+      type: object
+      properties:
+        city:
+          type: string
+          description: City Name
+          example: Muenchen
+        country:
+          type: string
+          description: Name of the Country
+          example: Germany
+        extensionFields:
+          type: object
+          description: Arbitrary json key value pairs
+        firstName:
+          type: string
+          description: First Name of the Person
+          example: John
+        houseNumber:
+          type: string
+          description: House Number
+          example: '6'
+        id:
+          type: string
+          description: Unique MongoDB identifier
+          example: 1bf8b88a-7bb8-4b92-90bc-d1fa34a60a57
+        lastName:
+          type: string
+          description: Last Name of the Person
+          example: Doe
+        streetAddress:
+          type: string
+          description: Street name w/o house number
+          example: Theresienstrasse
+        zip:
+          type: string
+          description: ZIP Code
+          example: '80333'

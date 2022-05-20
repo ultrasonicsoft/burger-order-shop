@@ -1,0 +1,254 @@
+openapi: 3.0.3
+info:
+  title: Order Service API
+  description: API that allows to perform CRUD operations for order information stored in a DB.
+  contact:
+    name: Andreas Krause
+  license:
+    name: Demo
+  version: '1.0'
+servers:
+  - url: http://localhost:8081
+    description: Inferred Url
+tags:
+  - name: order-api
+    description: Order Api
+paths:
+  /api/v1/order:
+    get:
+      tags:
+        - order-api
+      summary: Get Order List
+      description: This function retrieves all orders from the Database.
+      operationId: findAllUsingGET
+      parameters:
+        - name: page
+          in: query
+          description: page
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: size
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      tags:
+        - order-api
+      summary: Create Order
+      description: This function creates a new order entry on the DB.Externally supplied ids are ignored.
+      operationId: createUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Order'
+    delete:
+      tags:
+        - order-api
+      summary: Delete all Order in DB
+      description: This function deletes all orders from the database.
+      operationId: deleteAllUsingDELETE
+      responses:
+        '204':
+          description: No Content
+  /api/v1/order/count:
+    get:
+      tags:
+        - order-api
+      summary: Number of Orders
+      description: This function retrieves the amount of orders contained in the database
+      operationId: countUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int64
+  /api/v1/order/{id}:
+    get:
+      tags:
+        - order-api
+      summary: Read Order by ID
+      description: This function reads a single order from the database.
+      operationId: readUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Order'
+    put:
+      tags:
+        - order-api
+      summary: Update Order
+      description: This function updates an order on the database. This does not support delta updates.
+      operationId: upsertUsingPUT
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Order'
+    delete:
+      tags:
+        - order-api
+      summary: Delete Order by ID
+      description: This function deletes an order from the database.
+      operationId: deleteUsingDELETE
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+components:
+  schemas:
+    Address:
+      title: Address
+      type: object
+      properties:
+        city:
+          type: string
+          description: City Name
+          example: Muenchen
+        country:
+          type: string
+          description: Name of the Country
+          example: Germany
+        firstName:
+          type: string
+          description: First Name of the Person
+          example: John
+        houseNumber:
+          type: string
+          description: House Number
+          example: '6'
+        lastName:
+          type: string
+          description: Last Name of the Person
+          example: Doe
+        streetAddress:
+          type: string
+          description: Street name w/o house number
+          example: Theresienstrasse
+        zip:
+          type: string
+          description: ZIP Code
+          example: '80333'
+    Order:
+      title: Order
+      type: object
+      properties:
+        billTo:
+          description: Billing Address
+          $ref: '#/components/schemas/Address'
+        currencyCode:
+          type: string
+          description: Order Currency
+          example: EUR
+        id:
+          type: string
+          description: Unique MongoDB identifier
+          example: 1bf8b88a-7bb8-4b92-90bc-d1fa34a60a57
+        items:
+          type: array
+          description: Items of the Order
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        orderDate:
+          type: string
+          description: Date of Order Capture
+          example: '2022-01-10'
+        orderValue:
+          type: number
+          description: Value of the Order
+          format: float
+          example: 100.25
+        shipTo:
+          description: Shipping Address
+          $ref: '#/components/schemas/Address'
+        soldTo:
+          description: Sold-To Address
+          $ref: '#/components/schemas/Address'
+        taxValue:
+          type: number
+          description: Value of the Taxes
+          format: float
+          example: 10.03
+    OrderItem:
+      title: OrderItem
+      type: object
+      properties:
+        itemId:
+          type: string
+          description: Unique identifier of the Order Item
+          example: '00010'
+        itemPrice:
+          type: number
+          description: Price of the Order Item w/o taxes
+          format: float
+          example: 5.27
+        productId:
+          type: string
+          description: Unique identifier of the Product
+          example: '100000101'
+        quantity:
+          type: integer
+          description: Quantity of the Product
+          format: int32
+          example: 5

@@ -1,0 +1,38 @@
+version: "3"
+services:
+  mongodb-contact:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27017:27017"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+  mongodb-order:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27018:27017"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+  contact-service:
+    build: contact-service/
+    command: 
+     - "--spring.data.mongodb.host=mongodb-contact" 
+     - "--spring.data.mongodb.port=27017"
+     - "--api.maxArtificialLatency=0"
+     - "--dataload.numberOfPersons=10"
+     - "--spring.profiles.active="
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongodb-contact
+  order-service:
+    build: order-service/
+    command: 
+     - "--spring.data.mongodb.host=mongodb-order" 
+     - "--spring.data.mongodb.port=27017"
+     - "--api.maxArtificialLatency=0"
+     - "--spring.profiles.active="
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongodb-order
+
