@@ -76,7 +76,7 @@ Until now your code sits on your computer. In this task you will liberate it and
 
 Should you have enabled CORS for development purposes, this is the time to disable it. Also make sure you tell us how you got rid of it in the challenge interview ;-).
 
-You can also take a step back and think how you would serve your UI in a cloud environment. This is also a good talking point for the interview.
+You can also take a step back and think how you would serve your UI in a cloud environment like AWS, Azure or GCP. This is also a good talking point for the interview.
 
 
 ## Task 5: Presentation
