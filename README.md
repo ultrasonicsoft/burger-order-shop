@@ -87,6 +87,8 @@ Congratulations you have completed the technical part of your challenge. Now you
 * Complete Source Code 
 * Amended docker-compose file (to re-create your setup on our own infrastructure)
 
+**Please send back your solution as git repository (including .git folder) packed as zip archive. (e.g. by creating a dropbox / Google Drive or similar link to avoid issues when sending via email)**
+
 During the meeting we would follow the below structure:
 
 * Demo of your Solution: Be creative and entertain us
