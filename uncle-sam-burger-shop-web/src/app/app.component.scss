@@ -1,0 +1,20 @@
+  mat-sidenav-container {
+      // background-color: #414162;
+      height: 100vh;
+  }
+
+  mat-sidenav {
+      width: 200px;
+  }
+
+  .center {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      span {
+          margin-left: 1rem;
+      }
+
+  }
