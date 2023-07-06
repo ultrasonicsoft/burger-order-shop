@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NgxsStoreModule } from './@states/store.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -26,6 +27,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxsStoreModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

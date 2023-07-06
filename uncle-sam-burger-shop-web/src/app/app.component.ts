@@ -3,6 +3,11 @@ import { ChangeDetectorRef, Component, OnDestroy, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ContactsService } from './@services/contacts.service';
 import { OrdersService } from './@services/orders.service';
+import { Store } from '@ngxs/store';
+import { ContactsState } from './@states/contacts.state';
+import { Subscription } from 'rxjs';
+import { ContactEntry } from './@models/contact-entry.model';
+import { EmitterService } from '@ngxs-labs/emitter';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +23,10 @@ export class AppComponent implements OnDestroy {
 
   contactsService = inject(ContactsService);
   orderService = inject(OrdersService);
+  store = inject(Store);
+  emitter = inject(EmitterService);
+
+  subscription = new Subscription();
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -35,15 +44,22 @@ export class AppComponent implements OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.contactsService.getContacts().subscribe((response: any) => {
-      console.debug('🔥 contacts response', response);
-    });
+    this.loadStates();
 
     this.orderService.getOrders().subscribe((response: any) => {
       console.debug('🔥 orders response', response);
     });
   }
 
+  private loadStates(): void {
+    const hasContacts = this.store.selectSnapshot(ContactsState.hasAny());
+    if (!hasContacts) {
+      this.subscription.add(this.contactsService.getContacts().subscribe((contacts: ContactEntry[]) => {
+        console.debug('🔥 contacts response', contacts);
+        this.emitter.action(ContactsState.setAll).emit(contacts as any);
+      }));
+    }
+  }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
