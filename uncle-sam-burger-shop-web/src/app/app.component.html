@@ -4,22 +4,16 @@
     <mat-sidenav #snav [opened]="openSideNav" [mode]="mobileQuery.matches ? 'over' : 'side'"
         [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
         <mat-nav-list>
-            <a mat-list-item routerLink="/">
+            <a mat-list-item routerLink="orders">
                 <div class="center">
                     <mat-icon>grid_view</mat-icon>
                     <span>{{ 'ORDERS' }}</span>
                 </div>
             </a>
-            <a mat-list-item [routerLink]="['/', '']">
+            <a mat-list-item [routerLink]="['contacts']">
                 <div class="center">
                     <mat-icon>contacts</mat-icon>
                     <span>{{ 'CONTACTS' }}</span>
-                </div>
-            </a>
-            <a mat-list-item routerLink="/">
-                <div class="center">
-                    <mat-icon>support_agent</mat-icon>
-                    <span>{{ 'SUPPORT' }}</span>
                 </div>
             </a>
         </mat-nav-list>
