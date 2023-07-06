@@ -8,6 +8,9 @@ import { ContactsState } from './@states/contacts.state';
 import { Subscription } from 'rxjs';
 import { ContactEntry } from './@models/contact-entry.model';
 import { EmitterService } from '@ngxs-labs/emitter';
+import { BurgersState } from './@states/burgers.state';
+import { BurgersService } from './@services/burgers.service';
+import { BurgerEntry } from './@models/burger-entry.model';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +26,8 @@ export class AppComponent implements OnDestroy {
 
   contactsService = inject(ContactsService);
   orderService = inject(OrdersService);
+  burgerService = inject(BurgersService);
+
   store = inject(Store);
   emitter = inject(EmitterService);
 
@@ -44,14 +49,15 @@ export class AppComponent implements OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.loadStates();
+    this.loadContacts();
+    this.loadBurgers();
 
     this.orderService.getOrders().subscribe((response: any) => {
       console.debug('🔥 orders response', response);
     });
   }
 
-  private loadStates(): void {
+  private loadContacts(): void {
     const hasContacts = this.store.selectSnapshot(ContactsState.hasAny());
     if (!hasContacts) {
       this.subscription.add(this.contactsService.getContacts().subscribe((contacts: ContactEntry[]) => {
@@ -61,7 +67,18 @@ export class AppComponent implements OnDestroy {
     }
   }
 
+  private loadBurgers(): void {
+    const hasBurgers = this.store.selectSnapshot(BurgersState.hasAny());
+    if (!hasBurgers) {
+      this.subscription.add(this.burgerService.getBurgers().subscribe((burgers: BurgerEntry[]) => {
+        console.debug('🔥 burgers response', burgers);
+        this.emitter.action(BurgersState.setAll).emit(burgers as any);
+      }));
+    }
+  }
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.subscription.unsubscribe();
   }
 }
