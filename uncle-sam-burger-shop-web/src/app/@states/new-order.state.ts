@@ -1,6 +1,6 @@
 import { Selector, State, StateContext } from '@ngxs/store';
 import { EmitterAction, Receiver } from '@ngxs-labs/emitter';
-import { Item, OrderEntry } from '../@models/order-entry.model';
+import { Item, OrderEntry, To } from '../@models/order-entry.model';
 import { AppConfig } from '../@config/config';
 
 @State<OrderEntry>({
@@ -52,4 +52,33 @@ export class NewOrderState {
             items
         });
     }
+
+    @Receiver()
+    static setSoldTo(
+        { patchState }: StateContext<OrderEntry>,
+        { payload }: EmitterAction<To>) {
+        patchState({
+            soldTo: payload
+        });
+    }
+
+    @Receiver()
+    static setShipTo(
+        { patchState }: StateContext<OrderEntry>,
+        { payload }: EmitterAction<To>) {
+        patchState({
+            shipTo: payload
+        });
+    }
+
+    @Receiver()
+    static setBillTo(
+        { patchState }: StateContext<OrderEntry>,
+        { payload }: EmitterAction<To>) {
+        patchState({
+            billTo: payload
+        });
+    }
+
+
 }

@@ -9,6 +9,7 @@
         "SELECT_BURGERS": "Select Burgers",
         "SOLD_TO": "Sold To",
         "SHIP_TO": "Ship To",
+        "BILL_TO": "Bill To",
         "ADD_ITEM": "Add Item"
     },
     "CONTACTS": {

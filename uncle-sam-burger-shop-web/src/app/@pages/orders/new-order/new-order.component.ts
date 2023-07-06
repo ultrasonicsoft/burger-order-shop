@@ -10,7 +10,7 @@ import { EmitterService } from '@ngxs-labs/emitter';
 import { NewOrderState } from 'src/app/@states/new-order.state';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { Item } from 'src/app/@models/order-entry.model';
+import { Item, To } from 'src/app/@models/order-entry.model';
 import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
 import { AsyncPipe, NgFor } from '@angular/common';
@@ -19,6 +19,7 @@ import { FindContactComponent } from 'src/app/@components/find-contact/find-cont
 import { AddContactComponent } from '../../contacts/add-contact/add-contact.component';
 import { ContactEntry } from 'src/app/@models/contact-entry.model';
 import { ContactsState } from 'src/app/@states/contacts.state';
+import { ContactViewComponent } from '../../contacts/contact-view/contact-view.component';
 
 @Component({
   selector: 'sam-new-order',
@@ -36,7 +37,8 @@ import { ContactsState } from 'src/app/@states/contacts.state';
     NgFor,
     AsyncPipe,
     ItemViewComponent,
-    FindContactComponent
+    FindContactComponent,
+    ContactViewComponent
   ],
   templateUrl: './new-order.component.html',
   styleUrls: ['./new-order.component.scss'],
@@ -55,6 +57,10 @@ export class NewOrderComponent {
   items$!: Observable<Item[]>;
 
   @ViewChild('findContact', { static: false }) findContact!: FindContactComponent;
+
+  soldToContact!: ContactEntry;
+  shipToContact!: ContactEntry;
+  billToContact!: ContactEntry;
 
   emitter = inject(EmitterService);
   dialog = inject(MatDialog);
@@ -79,6 +85,24 @@ export class NewOrderComponent {
     });
   }
 
+  soldToContactSelected(contact: ContactEntry): void {
+    this.soldToContact = contact;
+    const soldTo: To = { ...this.soldToContact };
+    this.emitter.action(NewOrderState.setSoldTo).emit(soldTo as any);
+  }
+
+  shipToContactSelected(contact: ContactEntry): void {
+    this.shipToContact = contact;
+    const shipTo: To = { ...this.shipToContact };
+    this.emitter.action(NewOrderState.setShipTo).emit(shipTo as any);
+  }
+
+  billToContactSelected(contact: ContactEntry): void {
+    this.billToContact = contact;
+    const billTo: To = { ...this.billToContact };
+    this.emitter.action(NewOrderState.setBillTo).emit(billTo as any);
+  }
+
   addContact(): void {
     const dialogRef = this.dialog.open(AddContactComponent, {
       // data: {name: this.name, animal: this.animal},
@@ -88,7 +112,6 @@ export class NewOrderComponent {
       console.log('The contact dialog was closed', contact);
       if (contact) {
         this.findContact.refresh();
-        this.emitter.action(ContactsState.add).emit(contact as any);
 
       }
       // if (newItem) {

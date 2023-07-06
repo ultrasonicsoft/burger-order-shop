@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -37,6 +37,8 @@ export class FindContactComponent {
 
   myControl = new FormControl();
 
+  @Output() selected = new EventEmitter<ContactEntry>();
+
   constructor() {
     this.contacts = this.store.selectSnapshot(ContactsState);
   }
@@ -56,6 +58,7 @@ export class FindContactComponent {
 
   contactSelected(selected: ContactEntry): void {
     this.selectedContact = selected;
+    this.selected.emit(this.selectedContact);
   }
 
   refresh(): void {

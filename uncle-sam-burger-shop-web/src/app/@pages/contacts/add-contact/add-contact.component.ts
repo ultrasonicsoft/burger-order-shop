@@ -14,6 +14,8 @@ import { ContactsService } from 'src/app/@services/contacts.service';
 import { Subscription, tap } from 'rxjs';
 import { ContactEntry } from 'src/app/@models/contact-entry.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EmitterService } from '@ngxs-labs/emitter';
+import { ContactsState } from 'src/app/@states/contacts.state';
 
 @Component({
   selector: 'sam-add-contact',
@@ -34,8 +36,8 @@ export class AddContactComponent implements OnDestroy {
 
   contactForm: FormGroup;
 
+  emitter = inject(EmitterService);
   contactService = inject(ContactsService);
-  destroyRef = inject(DestroyRef);
 
   subscription = new Subscription()
 
@@ -60,9 +62,10 @@ export class AddContactComponent implements OnDestroy {
     console.debug('🔥 contact', this.contactForm.value);
     if (this.contactForm.valid) {
       this.subscription.add(this.contactService.saveContact(this.contactForm.value).pipe(
-      ).subscribe((response: ContactEntry) => {
-        console.debug('🔥 saved contact', response);
-        this.dialogRef.close(response);
+      ).subscribe((savedContact: ContactEntry) => {
+        console.debug('🔥 saved contact', savedContact);
+        this.emitter.action(ContactsState.add).emit(savedContact as any);
+        this.dialogRef.close(savedContact);
       }));
     }
 

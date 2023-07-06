@@ -20,7 +20,8 @@
     <mat-step [stepControl]="secondFormGroup">
         <ng-template matStepLabel>{{'ORDERS.SOLD_TO' | translate }}</ng-template>
         <form [formGroup]="secondFormGroup">
-            <sam-find-contact #findContact></sam-find-contact>
+            <sam-find-contact #findContact (selected)="soldToContactSelected($event)"></sam-find-contact>
+            <sam-contact-view [contact]="soldToContact"></sam-contact-view>
             <button mat-raised-button color="accent" (click)="addContact()">
                 <mat-icon>add</mat-icon>
                 {{ 'CONTACTS.ADD_CONTACT' | translate }}
@@ -34,10 +35,27 @@
     <mat-step [stepControl]="secondFormGroup">
         <ng-template matStepLabel>{{'ORDERS.SHIP_TO' | translate }}</ng-template>
         <form [formGroup]="secondFormGroup">
-            <mat-form-field>
-                <mat-label>Address</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
+            <sam-find-contact #findContact (selected)="shipToContactSelected($event)"></sam-find-contact>
+            <sam-contact-view [contact]="shipToContact"></sam-contact-view>
+            <button mat-raised-button color="accent" (click)="addContact()">
+                <mat-icon>add</mat-icon>
+                {{ 'CONTACTS.ADD_CONTACT' | translate }}
+            </button>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <ng-template matStepLabel>{{'ORDERS.BILL_TO' | translate }}</ng-template>
+        <form [formGroup]="secondFormGroup">
+            <sam-find-contact #findContact (selected)="billToContactSelected($event)"></sam-find-contact>
+            <sam-contact-view [contact]="billToContact"></sam-contact-view> 
+            <button mat-raised-button color="accent" (click)="addContact()">
+                <mat-icon>add</mat-icon>
+                {{ 'CONTACTS.ADD_CONTACT' | translate }}
+            </button>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>

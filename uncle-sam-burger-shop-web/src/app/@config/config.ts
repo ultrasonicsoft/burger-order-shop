@@ -4,5 +4,5 @@ export const AppConfig = {
     getNewOrderId: () => {
         return URL.createObjectURL(new Blob([])).slice(-AppConfig.OrderIdLength);
     },
-   
+
 }
