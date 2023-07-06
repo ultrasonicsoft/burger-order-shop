@@ -9,8 +9,12 @@
                 </button>
             </div>
 
-            <sam-item-view *ngFor="let item of items$ | async" [item]="item">
-            </sam-item-view>
+            <div *ngIf="items$ | async as items">
+                <sam-item-view *ngFor="let item of items" [item]="item">
+                </sam-item-view>
+
+                <sam-order-summary></sam-order-summary>
+            </div>
 
             <div>
                 <button mat-button matStepperNext>Next</button>

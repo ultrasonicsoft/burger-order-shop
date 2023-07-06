@@ -13,13 +13,14 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angu
 import { Item, To } from 'src/app/@models/order-entry.model';
 import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ItemViewComponent } from './item-view/item-view.component';
 import { FindContactComponent } from 'src/app/@components/find-contact/find-contact.component';
 import { AddContactComponent } from '../../contacts/add-contact/add-contact.component';
 import { ContactEntry } from 'src/app/@models/contact-entry.model';
 import { ContactsState } from 'src/app/@states/contacts.state';
 import { ContactViewComponent } from '../../contacts/contact-view/contact-view.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 @Component({
   selector: 'sam-new-order',
@@ -38,7 +39,9 @@ import { ContactViewComponent } from '../../contacts/contact-view/contact-view.c
     AsyncPipe,
     ItemViewComponent,
     FindContactComponent,
-    ContactViewComponent
+    ContactViewComponent,
+    NgIf,
+    OrderSummaryComponent
   ],
   templateUrl: './new-order.component.html',
   styleUrls: ['./new-order.component.scss'],

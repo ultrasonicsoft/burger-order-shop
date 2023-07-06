@@ -19,7 +19,8 @@ export class NewOrderState {
         { setState }: StateContext<OrderEntry>) {
 
         const newOrder: OrderEntry = {
-            id: AppConfig.getNewOrderId()
+            id: AppConfig.getNewOrderId(),
+            orderDate: new Date()
         }
         setState(newOrder);
     }
@@ -32,9 +33,18 @@ export class NewOrderState {
 
         const items: Item[] = [...getState().items || []];
         items.push(payload);
+        const orderValue = NewOrderState.calculateOrderValue(items);
         patchState({
-            items
+            items,
+            orderValue
         });
+    }
+
+    static calculateOrderValue(items: Item[]): number {
+        return items.reduce(
+            (total: number, order: any) => total + order.itemPrice * order.quantity,
+            0
+        );
     }
 
     @Receiver()
@@ -48,10 +58,24 @@ export class NewOrderState {
         if (index >= 0) {
             items.splice(index, 1);
         }
+        const orderValue = NewOrderState.calculateOrderValue(items);
         patchState({
-            items
+            items,
+            orderValue
         });
     }
+
+    @Receiver()
+    static updateOrderValue(
+        { patchState }: StateContext<OrderEntry>,
+        { payload }: EmitterAction<number>) {
+        patchState({
+            orderValue: payload
+        })
+
+    }
+
+
 
     @Receiver()
     static setSoldTo(
