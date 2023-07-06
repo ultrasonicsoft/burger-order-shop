@@ -20,7 +20,8 @@ export class NewOrderState {
 
         const newOrder: OrderEntry = {
             id: AppConfig.getNewOrderId(),
-            orderDate: new Date()
+            orderDate: new Date(),
+            taxValue: AppConfig.TaxValue
         }
         setState(newOrder);
     }

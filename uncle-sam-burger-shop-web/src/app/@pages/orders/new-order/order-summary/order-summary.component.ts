@@ -6,6 +6,7 @@ import { Subscription, tap } from 'rxjs';
 import { NewOrderComponent } from '../new-order.component';
 import { NewOrderState } from 'src/app/@states/new-order.state';
 import { EmitterService } from '@ngxs-labs/emitter';
+import { AppConfig } from 'src/app/@config/config';
 
 @Component({
   selector: 'sam-order-summary',
@@ -18,7 +19,10 @@ import { EmitterService } from '@ngxs-labs/emitter';
 export class OrderSummaryComponent implements OnDestroy {
 
 
+  orderValue = 0;
   totalValue = 0;
+  taxValue = AppConfig.TaxValue;
+
 
   store = inject(Store);
   emitter = inject(EmitterService);
@@ -28,7 +32,7 @@ export class OrderSummaryComponent implements OnDestroy {
   ngOnInit() {
     this.subscription.add(this.store.select(NewOrderState).pipe(
       tap((order: OrderEntry) => {
-        this.totalValue = order?.orderValue || 0;
+        this.orderValue = order?.orderValue || 0;
         this.cd.detectChanges();
       })
     ).subscribe());

@@ -1,3 +1,5 @@
 <div>
-    Order Total: {{ totalValue | currency }}
+    Order Total: {{ orderValue | currency }}
+    Tax: {{ taxValue | currency }}
+    Grand Total: {{ taxValue + orderValue | currency }}
 </div>

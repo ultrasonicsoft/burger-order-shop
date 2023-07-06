@@ -68,7 +68,12 @@
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
+        <p>Confirm Order</p>
+        <button mat-raised-button color="accent" (click)="confirmOrder()">
+            <mat-icon>checkmark</mat-icon>
+            {{ 'ORDERS.CONFIRM_ORDER' | translate }}
+        </button>
+
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button (click)="stepper.reset()">Reset</button>

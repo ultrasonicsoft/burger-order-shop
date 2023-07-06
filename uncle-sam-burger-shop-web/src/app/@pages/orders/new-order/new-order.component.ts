@@ -10,9 +10,9 @@ import { EmitterService } from '@ngxs-labs/emitter';
 import { NewOrderState } from 'src/app/@states/new-order.state';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { Item, To } from 'src/app/@models/order-entry.model';
-import { Observable } from 'rxjs';
-import { Select } from '@ngxs/store';
+import { Item, OrderEntry, To } from 'src/app/@models/order-entry.model';
+import { Observable, Subscriber, Subscription } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ItemViewComponent } from './item-view/item-view.component';
 import { FindContactComponent } from 'src/app/@components/find-contact/find-contact.component';
@@ -21,6 +21,7 @@ import { ContactEntry } from 'src/app/@models/contact-entry.model';
 import { ContactsState } from 'src/app/@states/contacts.state';
 import { ContactViewComponent } from '../../contacts/contact-view/contact-view.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { OrdersService } from 'src/app/@services/orders.service';
 
 @Component({
   selector: 'sam-new-order',
@@ -66,8 +67,11 @@ export class NewOrderComponent {
   billToContact!: ContactEntry;
 
   emitter = inject(EmitterService);
+  store = inject(Store);
   dialog = inject(MatDialog);
+  ordersService = inject(OrdersService);
 
+  subscription = new Subscription();
 
   constructor(private _formBuilder: FormBuilder) { }
 
@@ -123,5 +127,18 @@ export class NewOrderComponent {
     });
   }
 
+  confirmOrder(): void {
+    const newOrder: OrderEntry = this.store.selectSnapshot(NewOrderState);
+    if (newOrder) {
+      this.subscription.add(
+        this.ordersService.placeOrder(newOrder).subscribe((savedOrder: OrderEntry) => {
+          console.debug('🔥 order created', savedOrder);
+        }));
+    }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
 }
