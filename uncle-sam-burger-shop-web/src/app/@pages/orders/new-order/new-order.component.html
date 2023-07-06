@@ -7,8 +7,6 @@
                     <mat-icon>add</mat-icon>
                     {{ 'ORDERS.ADD_ITEM' | translate }}
                 </button>
-
-                <!-- <sam-item-entry></sam-item-entry> -->
             </div>
 
             <sam-item-view *ngFor="let item of items$ | async" [item]="item">
@@ -22,10 +20,11 @@
     <mat-step [stepControl]="secondFormGroup">
         <ng-template matStepLabel>{{'ORDERS.SOLD_TO' | translate }}</ng-template>
         <form [formGroup]="secondFormGroup">
-            <mat-form-field>
-                <mat-label>Address</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
+            <sam-find-contact #findContact></sam-find-contact>
+            <button mat-raised-button color="accent" (click)="addContact()">
+                <mat-icon>add</mat-icon>
+                {{ 'CONTACTS.ADD_CONTACT' | translate }}
+            </button>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>

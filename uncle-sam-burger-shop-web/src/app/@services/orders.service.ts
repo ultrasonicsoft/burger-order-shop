@@ -11,6 +11,6 @@ export class OrdersService {
   http = inject(HttpClient);
 
   getOrders(): Observable<any> {
-    return this.http.get(ENDPOINTS.ORDERS.getOrders());
+    return this.http.get(ENDPOINTS.ORDERS.orders());
   }
 }

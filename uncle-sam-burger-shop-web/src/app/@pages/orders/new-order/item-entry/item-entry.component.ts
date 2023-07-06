@@ -41,7 +41,6 @@ export class ItemEntryComponent implements OnInit, OnDestroy {
   quantity = 0;
 
   myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
   filteredOptions!: Observable<BurgerEntry[]>;
 
   selectedBurger!: BurgerEntry;
@@ -86,7 +85,7 @@ export class ItemEntryComponent implements OnInit, OnDestroy {
   }
 
   cancel(): void {
-
+    this.dialogRef.close(null);
   }
 
   ngOnDestroy(): void {

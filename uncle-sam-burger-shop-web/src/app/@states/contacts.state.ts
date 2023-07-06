@@ -15,6 +15,15 @@ export class ContactsState {
     }
 
     @Receiver()
+    static add(
+        { getState, setState }: StateContext<ContactEntry[]>,
+        { payload }: EmitterAction<ContactEntry>) {
+        const contacts = [...getState() || []];
+        contacts.push(payload);
+        setState(contacts);
+    }
+
+    @Receiver()
     static setAll(
         { setState }: StateContext<ContactEntry[]>,
         { payload }: EmitterAction<ContactEntry[]>) {

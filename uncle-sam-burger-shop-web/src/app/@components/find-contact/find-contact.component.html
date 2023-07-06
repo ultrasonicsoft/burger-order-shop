@@ -1,0 +1,11 @@
+<mat-form-field class="example-full-width">
+    <mat-label>Select Contact</mat-label>
+    <input type="text" placeholder="Select Contact" aria-label="Contact" matInput [formControl]="myControl"
+        [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let entry of filteredOptions | async" [value]="entry.firstName + ' ' + entry.lastName"
+            (onSelectionChange)="contactSelected(entry)">
+            {{ entry.firstName }} {{ entry.lastName }}
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>

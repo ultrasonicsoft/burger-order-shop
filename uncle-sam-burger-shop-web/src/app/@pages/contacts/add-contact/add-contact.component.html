@@ -1,0 +1,47 @@
+<form [formGroup]="contactForm" (ngSubmit)="saveContact()">
+    <h1 mat-dialog-title>Add Contact</h1>
+    <div mat-dialog-content>
+        <mat-form-field class="example-full-width">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>House Number</mat-label>
+            <input matInput formControlName="houseNumber">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Street Address</mat-label>
+            <input matInput formControlName="streetAddress">
+        </mat-form-field>
+
+        <!-- TODO: Add Select either with Google Map API or with API to get list of cities -->
+        <mat-form-field class="example-full-width">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city">
+        </mat-form-field>
+
+        <!-- TODO: Add Select either with Google Map API or with API to get list of cities -->
+        <mat-form-field class="example-full-width">
+            <mat-label>Zip</mat-label>
+            <input matInput formControlName="zip">
+        </mat-form-field>
+
+        <!-- TODO: Add Select either with Google Map API or with API to get list of cities -->
+        <mat-form-field class="example-full-width">
+            <mat-label>Country</mat-label>
+            <input matInput formControlName="country">
+        </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="cancel()">Cancel</button>
+        <button type="submit" mat-button cdkFocusInitial (click)="saveContact()">Save Contact</button>
+    </div>
+</form>

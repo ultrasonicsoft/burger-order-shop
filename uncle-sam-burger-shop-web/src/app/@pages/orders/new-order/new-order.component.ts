@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,6 +15,10 @@ import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
 import { AsyncPipe, NgFor } from '@angular/common';
 import { ItemViewComponent } from './item-view/item-view.component';
+import { FindContactComponent } from 'src/app/@components/find-contact/find-contact.component';
+import { AddContactComponent } from '../../contacts/add-contact/add-contact.component';
+import { ContactEntry } from 'src/app/@models/contact-entry.model';
+import { ContactsState } from 'src/app/@states/contacts.state';
 
 @Component({
   selector: 'sam-new-order',
@@ -31,7 +35,8 @@ import { ItemViewComponent } from './item-view/item-view.component';
     MatDialogModule,
     NgFor,
     AsyncPipe,
-    ItemViewComponent
+    ItemViewComponent,
+    FindContactComponent
   ],
   templateUrl: './new-order.component.html',
   styleUrls: ['./new-order.component.scss'],
@@ -49,8 +54,12 @@ export class NewOrderComponent {
   @Select(NewOrderState.items)
   items$!: Observable<Item[]>;
 
+  @ViewChild('findContact', { static: false }) findContact!: FindContactComponent;
+
   emitter = inject(EmitterService);
   dialog = inject(MatDialog);
+
+
   constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -64,9 +73,29 @@ export class NewOrderComponent {
 
     dialogRef.afterClosed().subscribe((newItem: Item) => {
       console.log('The dialog was closed', newItem);
-      this.emitter.action(NewOrderState.addItem).emit(newItem as any);
-      // this.animal = result;
+      if (newItem) {
+        this.emitter.action(NewOrderState.addItem).emit(newItem as any);
+      }
     });
   }
+
+  addContact(): void {
+    const dialogRef = this.dialog.open(AddContactComponent, {
+      // data: {name: this.name, animal: this.animal},
+    });
+
+    dialogRef.afterClosed().subscribe((contact: ContactEntry) => {
+      console.log('The contact dialog was closed', contact);
+      if (contact) {
+        this.findContact.refresh();
+        this.emitter.action(ContactsState.add).emit(contact as any);
+
+      }
+      // if (newItem) {
+      //   this.emitter.action(NewOrderState.addItem).emit(newItem as any);
+      // }
+    });
+  }
+
 
 }

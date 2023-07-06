@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Item } from 'src/app/@models/order-entry.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';

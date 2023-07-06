@@ -5,6 +5,13 @@
     },
     "ORDERS": {
         "TITLE": "Bestellungen Übersicht",
-        "NEW_ORDER": "Neue Ordnung"
+        "NEW_ORDER": "Neue Ordnung",
+        "SELECT_BURGERS": "Select Burgers",
+        "SOLD_TO": "Sold To",
+        "SHIP_TO": "Ship To",
+        "ADD_ITEM": "Add Item"
+    },
+    "CONTACTS": {
+        "ADD_CONTACT": "Add Contact"
     }
 }

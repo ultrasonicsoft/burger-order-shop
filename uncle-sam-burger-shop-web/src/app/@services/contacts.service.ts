@@ -12,6 +12,10 @@ export class ContactsService {
   http = inject(HttpClient);
 
   getContacts(): Observable<ContactEntry[]> {
-    return this.http.get<ContactEntry[]>(ENDPOINTS.CONTACTS.getContacts());
+    return this.http.get<ContactEntry[]>(ENDPOINTS.CONTACTS.contacts());
+  }
+
+  saveContact(payload: ContactEntry): Observable<ContactEntry> {
+    return this.http.post<ContactEntry>(ENDPOINTS.CONTACTS.contacts(), payload);
   }
 }
