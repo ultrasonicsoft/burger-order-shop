@@ -2,6 +2,7 @@
   "burgers": [
     {
       "id": 0,
+      "price": 10,
       "name": "Tribute Burger",
       "restaurant": "Honest Burgers",
       "web": "www.honestburgers.co.uk",
@@ -28,6 +29,7 @@
     },
     {
       "id": 1,
+      "price": 11,
       "name": "Pulled Mooshie",
       "restaurant": "Mooshies",
       "web": "www.veganburger.org",
@@ -50,6 +52,7 @@
     },
     {
       "id": 2,
+      "price": 13,
       "name": "Krabby Patty",
       "restaurant": "Krusty Krab",
       "web": "https://twitter.com/SpongeBob",
@@ -79,6 +82,7 @@
     },
     {
       "id": 3,
+      "price": 14,
       "name": "The Good Burger",
       "restaurant": "Good Burger",
       "web": "https://en.wikipedia.org/wiki/Good_Burger",
@@ -104,6 +108,7 @@
     },
     {
       "id": 4,
+      "price": 15,
       "name": "Crunchy Nacho Burger",
       "restaurant": "Max Burgers",
       "web": "https://www.max.se/maten/meny/burgare/crunchy-nacho-burger/",
@@ -132,6 +137,7 @@
     },
     {
       "id": 5,
+      "price": 16,
       "name": "Barbie Burger",
       "restaurant": "Flower Burger",
       "web": "https://www.flowerburger.it/",
@@ -157,6 +163,7 @@
     },
     {
       "id": 6,
+      "price": 17,
       "name": "Curry On My Wayward Bun",
       "restaurant": "Bob's Burgers",
       "web": "https://bobs-burgers.fandom.com/wiki/Burger_of_the_Day",
@@ -179,6 +186,7 @@
     },
     {
       "id": 7,
+      "price": 18,
       "name": "MEISTER ALLER KLASSEN",
       "restaurant": "Burgermeister",
       "web": "https://burger-meister.de",
@@ -211,6 +219,7 @@
     },
     {
       "id": 8,
+      "price": 19,
       "name": "Vegetarian Burger (Indian Style)",
       "restaurant": "Indian Burgers",
       "web": "https://www.cookwithmanali.com/vegetarian-burger-indian-style/",
@@ -236,6 +245,7 @@
     },
     {
       "id": 9,
+      "price": 20,
       "name": "Fat Santa",
       "restaurant": "Sky City Hamilton",
       "web": "https://skycityhamilton.co.nz/eat-drink/eat-burger/",
@@ -262,6 +272,7 @@
     },
     {
       "id": 10,
+      "price": 21,
       "name": "Blondie",
       "restaurant": "Yankys",
       "web": "http://yankyslambton.co.za/menu/",
@@ -290,6 +301,7 @@
     },
     {
       "id": 11,
+      "price": 22,
       "name": "Monster Burger",
       "restaurant": "Yankys",
       "web": "http://yankyslambton.co.za/menu/",
@@ -319,6 +331,7 @@
     },
     {
       "id": 12,
+      "price": 23,
       "name": "Buffalo chicken burger",
       "restaurant": "Meat Mission",
       "web": "http://meatliquor.com/",
@@ -343,6 +356,7 @@
     },
     {
       "id": 13,
+      "price": 24,
       "name": "Cheatday Burger",
       "restaurant": "Burgeramt",
       "web": "https://www.burgeramt.com/",
@@ -369,6 +383,7 @@
     },
     {
       "id": 14,
+      "price": 25,
       "name": "The Truffler (vegan)",
       "restaurant": "Byron Burgers",
       "web": "https://www.byron.co.uk/",
@@ -404,6 +419,7 @@
     },
     {
       "id": 15,
+      "price": 26,
       "name": "Aloette Buger",
       "restaurant": "Aloette",
       "web": "https://aloetterestaurant.com/",
@@ -428,6 +444,7 @@
     },
     {
       "id": 16,
+      "price": 27,
       "name": "BBQ Burger",
       "restaurant": "Fresh Plant Powered",
       "web": "https://freshplantpowered.com/",
@@ -503,6 +520,7 @@
     },
     {
       "id": 17,
+      "price": 28,
       "name": "Carroll's Cheese Burger",
       "restaurant": "Carroll's Pub Worms",
       "web": "https://www.carrolls-pub-worms.de/",
@@ -529,6 +547,7 @@
     },
     {
       "id": 18,
+      "price": 29,
       "name": "Mojitto Burger",
       "restaurant": "Burger King India",
       "web": "www.mojitto.com",
@@ -551,6 +570,7 @@
     },
     {
       "id": 19,
+      "price": 30,
       "name": "Double Slab Burger",
       "restaurant": "Slab Burgers",
       "web": "www.slabburgers.com",
@@ -577,6 +597,7 @@
     },
     {
       "id": 20,
+      "price": 31,
       "name": "Du Brown",
       "restaurant": "Du Brown Burger Café",
       "web": "https://www.dubrown.com/",
@@ -606,6 +627,7 @@
     },
     {
       "id": 21,
+      "price": 32,
       "name": "Melting Potes",
       "restaurant": "Melting Potes Nantes",
       "web": "https://www.meltingpotesnantes.com/",
@@ -631,6 +653,7 @@
     },
     {
       "id": 22,
+      "price": 33,
       "name": "Big Fernand",
       "restaurant": "Big Fernand",
       "web": "https://bigfernand.com/",
@@ -696,6 +719,7 @@
     },
     {
       "id": 23,
+      "price": 34,
       "name": "PNY Burger",
       "restaurant": "PNY Burger",
       "web": "https://pnyburger.com/",
@@ -753,6 +777,7 @@
     },
     {
       "id": 24,
+      "price": 35,
       "name": "231 East",
       "restaurant": "231 East Street",
       "web": "https://www.231-east.fr/",
@@ -813,6 +838,7 @@
     },
     {
       "id": 25,
+      "price": 36,
       "name": "Cajun Black Bean Burger",
       "restaurant": "The Chicago Diner",
       "web": "www.veggiediner.com",
@@ -848,6 +874,7 @@
     },
     {
       "id": 26,
+      "price": 37,
       "name": "Hatch Green Chile Bacon Burger",
       "restaurant": "Whataburger",
       "web": "www.whataburger.com",
@@ -872,6 +899,7 @@
     },
     {
       "id": 27,
+      "price": 38,
       "name": "The Street Burgers and Coctail Bar Prague 1",
       "restaurant": "The Street",
       "web": "www.thestreet.cz",

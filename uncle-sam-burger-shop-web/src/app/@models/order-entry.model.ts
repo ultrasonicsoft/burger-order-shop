@@ -1,13 +1,13 @@
 export interface OrderEntry {
-    billTo: To;
-    currencyCode: string;
-    id: string;
-    items: Item[];
-    orderDate: Date;
-    orderValue: number;
-    shipTo: To;
-    soldTo: To;
-    taxValue: number;
+    billTo?: To;
+    currencyCode?: string;
+    id?: string;
+    items?: Item[];
+    orderDate?: Date;
+    orderValue?: number;
+    shipTo?: To;
+    soldTo?: To;
+    taxValue?: number;
 }
 
 export interface To {
@@ -25,4 +25,6 @@ export interface Item {
     itemPrice: number;
     productId: string;
     quantity: number;
+    // Note: For FE
+    name?: string;
 }

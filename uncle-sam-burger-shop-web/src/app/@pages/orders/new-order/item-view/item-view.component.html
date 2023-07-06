@@ -1,0 +1,8 @@
+<div>
+    <span>{{ item.name }} </span>
+    <span>{{ item.quantity }} x {{ item.itemPrice }}</span>
+    <span> = {{ item.itemPrice * item.quantity }} </span>
+    <button mat-icon-button color="warn" (click)="removeItem()">
+        <mat-icon>delete_forever</mat-icon>
+    </button>
+</div>

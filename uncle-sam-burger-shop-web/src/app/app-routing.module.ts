@@ -7,6 +7,10 @@ const routes: Routes = [
     loadComponent: () => import('./@pages/orders/orders.component').then(m => m.OrdersComponent)
   },
   {
+    path: 'new-order/:id',
+    loadComponent: () => import('./@pages/orders/new-order/new-order.component').then(m => m.NewOrderComponent),
+  },
+  {
     path: 'contacts',
     loadComponent: () => import('./@pages/contacts/contacts.component').then(m => m.ContactsComponent)
   },

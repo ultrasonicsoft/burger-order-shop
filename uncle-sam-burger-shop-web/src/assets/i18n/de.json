@@ -2,5 +2,9 @@
     "SIDE_NAV": {
         "ORDERS": "Bestellungen",
         "CONTACTS": "Kontakte"
+    },
+    "ORDERS": {
+        "TITLE": "Bestellungen Übersicht",
+        "NEW_ORDER": "Neue Ordnung"
     }
 }

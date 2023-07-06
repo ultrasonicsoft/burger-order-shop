@@ -58,23 +58,17 @@ export class AppComponent implements OnDestroy {
   }
 
   private loadContacts(): void {
-    const hasContacts = this.store.selectSnapshot(ContactsState.hasAny());
-    if (!hasContacts) {
-      this.subscription.add(this.contactsService.getContacts().subscribe((contacts: ContactEntry[]) => {
-        console.debug('🔥 contacts response', contacts);
-        this.emitter.action(ContactsState.setAll).emit(contacts as any);
-      }));
-    }
+    this.subscription.add(this.contactsService.getContacts().subscribe((contacts: ContactEntry[]) => {
+      console.debug('🔥 contacts response', contacts);
+      this.emitter.action(ContactsState.setAll).emit(contacts as any);
+    }));
   }
 
   private loadBurgers(): void {
-    const hasBurgers = this.store.selectSnapshot(BurgersState.hasAny());
-    if (!hasBurgers) {
-      this.subscription.add(this.burgerService.getBurgers().subscribe((burgers: BurgerEntry[]) => {
-        console.debug('🔥 burgers response', burgers);
-        this.emitter.action(BurgersState.setAll).emit(burgers as any);
-      }));
-    }
+    this.subscription.add(this.burgerService.getBurgers().subscribe((burgers: BurgerEntry[]) => {
+      console.debug('🔥 burgers response', burgers);
+      this.emitter.action(BurgersState.setAll).emit(burgers as any);
+    }));
   }
 
   ngOnDestroy(): void {

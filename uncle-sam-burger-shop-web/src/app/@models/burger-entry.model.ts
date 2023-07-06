@@ -1,9 +1,6 @@
 export interface BurgerEntry {
-    burgers: Burger[];
-}
-
-export interface Burger {
     id: number;
+    price: number;
     name: string;
     restaurant: string;
     web: string;
