@@ -1,6 +1,8 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ContactsService } from './@services/contacts.service';
+import { OrdersService } from './@services/orders.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +15,9 @@ export class AppComponent implements OnDestroy {
   private _mobileQueryListener: () => void;
 
   openSideNav = true;
+
+  contactsService = inject(ContactsService);
+  orderService = inject(OrdersService);
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -29,6 +34,14 @@ export class AppComponent implements OnDestroy {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+    this.contactsService.getContacts().subscribe((response: any) => {
+      console.debug('🔥 contacts response', response);
+    });
+
+    this.orderService.getOrders().subscribe((response: any) => {
+      console.debug('🔥 orders response', response);
+    });
   }
 
 
