@@ -4,4 +4,11 @@
         <mat-icon>menu</mat-icon>
     </button>
     <span>Uncle Sam Burgers</span>
+    <span class="example-spacer"></span>
+    <button mat-button [matMenuTriggerFor]="menu">{{ selectedLanguage }}</button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="changeLanguage('en')">English</button>
+        <button mat-menu-item (click)="changeLanguage('de')">Deutsch</button>
+    </mat-menu>
+
 </mat-toolbar>
