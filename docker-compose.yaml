@@ -1,5 +1,5 @@
 version: "3"
-services:
+services:  
   mongodb-contact:
     image: 'mongo:latest'
     ports:
@@ -19,7 +19,7 @@ services:
      - "--spring.data.mongodb.port=27017"
      - "--api.maxArtificialLatency=0"
      - "--dataload.numberOfPersons=10"
-     - "--spring.profiles.active="
+     - "--spring.profiles.active=CORS"
     ports:
       - 8080:8080
     depends_on:
@@ -30,9 +30,21 @@ services:
      - "--spring.data.mongodb.host=mongodb-order" 
      - "--spring.data.mongodb.port=27017"
      - "--api.maxArtificialLatency=0"
-     - "--spring.profiles.active="
+     - "--spring.profiles.active=CORS"
     ports:
       - 8081:8081
     depends_on:
       - mongodb-order
+  web:
+    depends_on:
+      - contact-service
+      - order-service
+    build:
+      context: uncle-sam-burger-shop-web
+      target: builder
+    ports:
+      - 4200:4200
+    volumes:
+      - ./uncle-sam-burger-shop-web:/project
+      - /project/node_modules
 

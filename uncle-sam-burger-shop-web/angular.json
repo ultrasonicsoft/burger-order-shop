@@ -75,8 +75,7 @@
               "browserTarget": "Uncle-Sam-Burger-Shop:build:production"
             },
             "development": {
-              "browserTarget": "Uncle-Sam-Burger-Shop:build:development",
-              "proxyConfig": "src/proxy.conf.json"
+              "browserTarget": "Uncle-Sam-Burger-Shop:build:development"
             }
           },
           "defaultConfiguration": "development"
