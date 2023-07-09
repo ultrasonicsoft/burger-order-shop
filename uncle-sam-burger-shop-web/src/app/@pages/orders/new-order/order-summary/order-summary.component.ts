@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, inject } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Item, OrderEntry } from 'src/app/@models/order-entry.model';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, inject } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { OrderEntry } from 'src/app/@models/order-entry.model';
 import { Store } from '@ngxs/store';
 import { Subscription, tap } from 'rxjs';
-import { NewOrderComponent } from '../new-order.component';
 import { NewOrderState } from 'src/app/@states/new-order.state';
 import { EmitterService } from '@ngxs-labs/emitter';
 import { AppConfig } from 'src/app/@config/config';

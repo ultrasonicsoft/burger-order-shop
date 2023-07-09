@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, inject } from '@angular/core';
-import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
-import { Select, Store } from '@ngxs/store';
+import { AsyncPipe, NgFor } from '@angular/common';
+import { Store } from '@ngxs/store';
 import { BurgersState } from 'src/app/@states/burgers.state';
 import { Observable, Subscription } from 'rxjs';
 import { BurgerEntry } from 'src/app/@models/burger-entry.model';

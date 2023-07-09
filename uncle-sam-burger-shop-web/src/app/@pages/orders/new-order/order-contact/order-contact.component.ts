@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, ViewChild, EventEmitter, Input, Output, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FindContactComponent } from 'src/app/@components/find-contact/find-contact.component';
 import { ContactViewComponent } from 'src/app/@pages/contacts/contact-view/contact-view.component';
 import { ContactEntry } from 'src/app/@models/contact-entry.model';

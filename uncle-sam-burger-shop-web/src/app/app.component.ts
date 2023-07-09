@@ -4,9 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ContactsService } from './@services/contacts.service';
 import { OrdersService } from './@services/orders.service';
 import { Store } from '@ngxs/store';
-import { ContactsState } from './@states/contacts.state';
 import { Subscription } from 'rxjs';
-import { ContactEntry } from './@models/contact-entry.model';
 import { EmitterService } from '@ngxs-labs/emitter';
 import { BurgersState } from './@states/burgers.state';
 import { BurgersService } from './@services/burgers.service';
@@ -52,7 +50,7 @@ export class AppComponent implements OnDestroy {
     // NOTE: Mock products api
     this.loadBurgers();
   }
-  
+
 
   private loadBurgers(): void {
     this.subscription.add(this.burgerService.getBurgers().subscribe((burgers: BurgerEntry[]) => {

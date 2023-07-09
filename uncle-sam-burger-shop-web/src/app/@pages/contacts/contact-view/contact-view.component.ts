@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ContactEntry } from 'src/app/@models/contact-entry.model';
 
 @Component({

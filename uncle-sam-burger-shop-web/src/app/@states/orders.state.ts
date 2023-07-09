@@ -1,7 +1,6 @@
-import { Selector, State, StateContext, createSelector } from '@ngxs/store';
+import { State, StateContext, createSelector } from '@ngxs/store';
 import { EmitterAction, Receiver } from '@ngxs-labs/emitter';
 import { OrderEntry } from '../@models/order-entry.model';
-import { AppConfig } from '../@config/config';
 
 @State<OrderEntry[]>({
     name: 'orders',

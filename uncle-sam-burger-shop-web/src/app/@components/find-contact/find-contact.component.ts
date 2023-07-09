@@ -6,9 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable, map, startWith } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { BurgersState } from 'src/app/@states/burgers.state';
 import { ContactEntry } from 'src/app/@models/contact-entry.model';
-import { AsyncPipe, NgFor, NgForOf } from '@angular/common';
+import { AsyncPipe, NgForOf } from '@angular/common';
 import { ContactsState } from 'src/app/@states/contacts.state';
 
 @Component({

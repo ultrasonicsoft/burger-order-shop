@@ -1,4 +1,4 @@
-import { Selector, State, StateContext, createSelector } from '@ngxs/store';
+import { State, StateContext, createSelector } from '@ngxs/store';
 import { EmitterAction, Receiver } from '@ngxs-labs/emitter';
 import { BurgerEntry } from '../@models/burger-entry.model';
 

@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { TranslateModule } from '@ngx-translate/core';
 
