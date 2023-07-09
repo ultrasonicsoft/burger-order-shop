@@ -35,16 +35,16 @@ services:
       - 8081:8081
     depends_on:
       - mongodb-order
-  # web:
-  #   depends_on:
-  #     - contact-service
-  #     - order-service
-  #   build:
-  #     context: uncle-sam-burger-shop-web
-  #     target: builder
-  #   ports:
-  #     - 4200:4200
-  #   volumes:
-  #     - ./uncle-sam-burger-shop-web:/project
-  #     - /project/node_modules
+  web:
+    depends_on:
+      - contact-service
+      - order-service
+    build:
+      context: uncle-sam-burger-shop-web
+      target: builder
+    ports:
+      - 4200:4200
+    volumes:
+      - ./uncle-sam-burger-shop-web:/project
+      - /project/node_modules
 

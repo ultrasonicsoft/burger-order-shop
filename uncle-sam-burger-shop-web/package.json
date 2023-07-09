@@ -1,12 +1,19 @@
 {
   "name": "uncle-sam-burger-shop",
+  "author": {
+    "email": "balramchavan@gmail.com",
+    "name": "Balram Chavan"
+  },
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "compodoc:build": "compodoc -p tsconfig.doc.json --port 9000",
+    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s --port 9000",
+    "compodoc:serve": "compodoc -s --port 9000"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +42,7 @@
     "@angular-devkit/build-angular": "^16.1.0",
     "@angular/cli": "~16.1.0",
     "@angular/compiler-cli": "^16.1.0",
+    "@compodoc/compodoc": "^1.1.21",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
