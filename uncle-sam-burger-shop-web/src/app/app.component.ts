@@ -49,11 +49,8 @@ export class AppComponent implements OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
+    // NOTE: Mock products api
     this.loadBurgers();
-
-    this.orderService.getOrders().subscribe((response: any) => {
-      console.debug('🔥 orders response', response);
-    });
   }
   
 

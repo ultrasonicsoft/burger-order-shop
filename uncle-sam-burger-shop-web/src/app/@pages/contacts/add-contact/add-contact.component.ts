@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AppConfig } from 'src/app/@config/config';
 import { ContactsService } from 'src/app/@services/contacts.service';
-import { Subscription, tap } from 'rxjs';
+import { Subscription, catchError, finalize, tap, throwError } from 'rxjs';
 import { ContactEntry } from 'src/app/@models/contact-entry.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EmitterService } from '@ngxs-labs/emitter';
@@ -39,6 +39,8 @@ export class AddContactComponent implements OnDestroy {
   emitter = inject(EmitterService);
   contactService = inject(ContactsService);
 
+  working = false;
+
   subscription = new Subscription()
 
   constructor(
@@ -59,14 +61,22 @@ export class AddContactComponent implements OnDestroy {
 
 
   saveContact(): void {
+    this.working = true;
     console.debug('🔥 contact', this.contactForm.value);
     if (this.contactForm.valid) {
       this.subscription.add(this.contactService.saveContact(this.contactForm.value).pipe(
-      ).subscribe((savedContact: ContactEntry) => {
-        console.debug('🔥 saved contact', savedContact);
-        this.emitter.action(ContactsState.add).emit(savedContact as any);
-        this.dialogRef.close(savedContact);
-      }));
+        tap((savedContact: ContactEntry) => {
+          console.debug('🔥 saved contact', savedContact);
+          this.emitter.action(ContactsState.add).emit(savedContact as any);
+          this.dialogRef.close(savedContact);
+        }),
+        catchError((err) => {
+          return throwError(() => new Error('Could not save contact...please try again', err))
+        }),
+        finalize(() => {
+          this.working = false;
+        })
+      ).subscribe());
     }
 
   }

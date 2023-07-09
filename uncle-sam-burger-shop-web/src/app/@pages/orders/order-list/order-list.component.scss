@@ -1,13 +1,25 @@
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    h3 {
+        font-style: italic;
+        margin-top: 1rem;
+    }
+}
+
 table {
     width: 100%;
-  }
-  
-  .mat-mdc-form-field {
+}
+
+.mat-mdc-form-field {
     font-size: 14px;
     width: 100%;
-  }
-  
-  td, th {
+}
+
+td,
+th {
     width: 25%;
-  }
-  
+}

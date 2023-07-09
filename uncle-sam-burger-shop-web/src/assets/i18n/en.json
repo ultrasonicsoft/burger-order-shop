@@ -1,4 +1,8 @@
 {
+    "COMMON": {
+        "ORDERS_LOADING": "Orders loading... please wait",
+        "CONTACTS_LOADING": "Contacts loading... please wait"
+    },
     "SIDE_NAV": {
         "ORDERS": "Orders",
         "CONTACTS": "Contacts"
@@ -17,6 +21,7 @@
         "ORDER_VALUE": "Order Value"
     },
     "CONTACTS": {
+        "TITLE": "Contacts",
         "ADD_CONTACT": "Add Contact",
         "FIRST_NAME": "First Name",
         "LAST_NAME": "Last Name",
