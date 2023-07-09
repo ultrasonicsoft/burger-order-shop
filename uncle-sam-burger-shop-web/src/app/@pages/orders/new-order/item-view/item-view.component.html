@@ -1,8 +1,32 @@
-<div>
-    <span>{{ item.name }} </span>
-    <span>{{ item.quantity }} x {{ item.itemPrice }}</span>
-    <span> = {{ item.itemPrice * item.quantity }} </span>
-    <button mat-icon-button color="warn" (click)="removeItem()">
+<!-- <div class="entry" *ngFor="let item of items">
+    <div class="item-name">
+        <span>{{ item.name }} </span>
+    </div>
+    <div class="quantity">
+        <span>{{ item.quantity }} x {{ item.itemPrice }}</span>
+        <span> = {{ item.itemPrice * item.quantity }} </span>
+    </div>
+    <button mat-icon-button color="warn" (click)="removeItem(item)">
         <mat-icon>delete_forever</mat-icon>
     </button>
-</div>
+</div> -->
+
+<table id="customers" *ngIf="items.length">
+    <tr>
+        <th>Burger Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let item of items">
+        <td>{{ item.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.itemPrice }}</td>
+        <td>{{ item.itemPrice * item.quantity }}</td>
+        <td><button mat-icon-button color="warn" (click)="removeItem(item)">
+                <mat-icon>delete_forever</mat-icon>
+            </button></td>
+    </tr>
+
+</table>

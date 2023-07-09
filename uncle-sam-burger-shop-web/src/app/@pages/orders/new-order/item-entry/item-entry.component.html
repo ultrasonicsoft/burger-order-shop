@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Add Item</h1>
+<h1 mat-dialog-title>{{ 'ORDERS.ADD_ITEM' | translate }}</h1>
 <div mat-dialog-content>
-    <form class="example-form">
+    <form class="item-form">
         <mat-form-field class="example-full-width">
             <mat-label>Choose Burger</mat-label>
             <input type="text" placeholder="Choose Burger" aria-label="Burger" matInput [formControl]="myControl"
@@ -25,7 +25,10 @@
 
     </form>
 </div>
-<div mat-dialog-actions>
-    <button mat-button (click)="cancel()">Cancel</button>
-    <button type="submit" mat-button cdkFocusInitial (click)="addItem()">Add</button>
+<div mat-dialog-actions align="end">
+    <button id="cancelButton" mat-stroked-button (click)="cancel()" color="warn">Cancel</button>
+    <button type="submit" mat-raised-button color="primary" cdkFocusInitial (click)="addItem()">
+        <mat-icon>add</mat-icon>
+        Add
+    </button>
 </div>

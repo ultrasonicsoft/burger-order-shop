@@ -38,7 +38,7 @@ import { Item } from 'src/app/@models/order-entry.model';
 export class ItemEntryComponent implements OnInit, OnDestroy {
 
   burgers: BurgerEntry[] = [];
-  quantity = 0;
+  quantity = 1;
 
   myControl = new FormControl();
   filteredOptions!: Observable<BurgerEntry[]>;

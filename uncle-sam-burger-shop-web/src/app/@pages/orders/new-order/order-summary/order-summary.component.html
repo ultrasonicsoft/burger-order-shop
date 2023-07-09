@@ -1,5 +1,21 @@
-<div>
-    Order Total: {{ orderValue | currency }}
-    Tax: {{ taxValue | currency }}
-    Grand Total: {{ taxValue + orderValue | currency }}
-</div>
+<mat-card>
+    <mat-card-header class="summary-container">
+        <h2>Order Summary</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="summary-container">
+            <div class="row">
+                <span class="label">Order Total:</span>
+                <div>{{ orderValue | currency }}</div>
+            </div>
+            <div class="row">
+                <span class="label">Tax:</span>
+                <div>{{ taxValue | currency }}</div>
+            </div>
+            <div class="row">
+                <span class="label">Grand Total:</span>
+                <div>{{ taxValue + orderValue | currency }}</div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

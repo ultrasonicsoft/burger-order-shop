@@ -1,0 +1,16 @@
+
+.item-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+
+    mat-form-field {
+        width: 90%;
+    }
+
+    #cancelButton {
+        margin-right: 2rem;
+    }
+}

@@ -7,10 +7,14 @@
     </div>
 </ng-container>
 <ng-template #content>
-    <button mat-fab extended color="warn" [routerLink]="['/new-order', 0]">
-        <mat-icon>add</mat-icon>
-        {{ 'ORDERS.NEW_ORDER' | translate }}
-    </button>
+
+    <div class="button-container">
+        <button id="orderButton" mat-fab extended color="warn" [routerLink]="['/new-order', 0]">
+            <mat-icon>add</mat-icon>
+            {{ 'ORDERS.NEW_ORDER' | translate }}
+        </button>
+    </div>
+
 
     <mat-form-field>
         <mat-label>Find Order</mat-label>

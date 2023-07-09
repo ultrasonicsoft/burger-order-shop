@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { EmitterService } from '@ngxs-labs/emitter';
 import { NewOrderState } from 'src/app/@states/new-order.state';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'sam-item-view',
@@ -11,6 +12,8 @@ import { NewOrderState } from 'src/app/@states/new-order.state';
   imports: [
     MatButtonModule,
     MatIconModule,
+    NgFor,
+    NgIf
   ],
   templateUrl: './item-view.component.html',
   styleUrls: ['./item-view.component.scss'],
@@ -18,11 +21,11 @@ import { NewOrderState } from 'src/app/@states/new-order.state';
 })
 export class ItemViewComponent {
 
-  @Input() item!: Item;
+  @Input() items!: Item[];
 
   emitter = inject(EmitterService);
 
-  removeItem(): void {
-    this.emitter.action(NewOrderState.removeItem).emit(this.item as any);
+  removeItem(item: Item): void {
+    this.emitter.action(NewOrderState.removeItem).emit(item as any);
   }
 }

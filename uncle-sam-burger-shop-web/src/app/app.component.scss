@@ -3,6 +3,12 @@
       height: 100vh;
   }
 
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   mat-sidenav {
       width: 200px;
   }

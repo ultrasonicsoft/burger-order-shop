@@ -3,8 +3,9 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angu
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { ItemEntryComponent } from './item-entry/item-entry.component';
 import { EmitterService } from '@ngxs-labs/emitter';
 import { NewOrderState } from 'src/app/@states/new-order.state';
@@ -42,7 +43,8 @@ import { OrdersService } from 'src/app/@services/orders.service';
     FindContactComponent,
     ContactViewComponent,
     NgIf,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    MatCardModule
   ],
   templateUrl: './new-order.component.html',
   styleUrls: ['./new-order.component.scss'],
@@ -81,6 +83,7 @@ export class NewOrderComponent {
 
   addItem(): void {
     const dialogRef = this.dialog.open(ItemEntryComponent, {
+      width: '400px'
       // data: {name: this.name, animal: this.animal},
     });
 

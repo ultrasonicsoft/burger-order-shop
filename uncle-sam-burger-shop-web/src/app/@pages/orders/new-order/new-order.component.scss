@@ -1,8 +1,53 @@
+:host {
+  width: 95%;
+  margin-top: 1rem;
+}
+
+
 .mat-stepper-horizontal {
-    margin-top: 8px;
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.add-item-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.items-containers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.entry-header {
+  font-size: large;
+  line-height: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .item-name {
+      margin-right: 3rem;
   }
-  
-  .mat-mdc-form-field {
-    margin-top: 16px;
+
+  .quantity {
+      margin-right: 2rem;
   }
-  
+}
+
+.order-summary {
+  display: flex;
+  justify-content: flex-end;
+}
