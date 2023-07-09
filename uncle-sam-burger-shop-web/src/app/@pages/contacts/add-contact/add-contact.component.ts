@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, Inject, OnDestroy, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { BurgerEntry } from 'src/app/@models/burger-entry.model';
 import { BurgersState } from 'src/app/@states/burgers.state';
@@ -16,17 +16,22 @@ import { ContactEntry } from 'src/app/@models/contact-entry.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EmitterService } from '@ngxs-labs/emitter';
 import { ContactsState } from 'src/app/@states/contacts.state';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'sam-add-contact',
   standalone: true,
   imports: [
+    NgIf,
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   templateUrl: './add-contact.component.html',
   styleUrls: ['./add-contact.component.scss'],
@@ -38,6 +43,7 @@ export class AddContactComponent implements OnDestroy {
 
   emitter = inject(EmitterService);
   contactService = inject(ContactsService);
+  snackBar = inject(MatSnackBar);
 
   working = false;
 
@@ -59,6 +65,9 @@ export class AddContactComponent implements OnDestroy {
     })
   }
 
+  showMessage(message: string, action: string) {
+    this.snackBar.open(message, action, { duration: 2000});
+  }
 
   saveContact(): void {
     this.working = true;
@@ -67,6 +76,7 @@ export class AddContactComponent implements OnDestroy {
       this.subscription.add(this.contactService.saveContact(this.contactForm.value).pipe(
         tap((savedContact: ContactEntry) => {
           console.debug('🔥 saved contact', savedContact);
+          this.showMessage('Contact saved', 'Close');
           this.emitter.action(ContactsState.add).emit(savedContact as any);
           this.dialogRef.close(savedContact);
         }),
@@ -80,7 +90,6 @@ export class AddContactComponent implements OnDestroy {
     }
 
   }
-
 
   cancel(): void {
     this.dialogRef.close(null);

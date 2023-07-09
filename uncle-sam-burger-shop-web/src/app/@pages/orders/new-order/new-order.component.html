@@ -32,59 +32,81 @@
             <mat-step [stepControl]="secondFormGroup">
                 <ng-template matStepLabel>{{'ORDERS.SOLD_TO' | translate }}</ng-template>
                 <form [formGroup]="secondFormGroup">
-                    <sam-find-contact #findContact (selected)="soldToContactSelected($event)"></sam-find-contact>
-                    <sam-contact-view [contact]="soldToContact"></sam-contact-view>
-                    <button mat-raised-button color="accent" (click)="addContact()">
-                        <mat-icon>add</mat-icon>
-                        {{ 'CONTACTS.ADD_CONTACT' | translate }}
-                    </button>
+                    <div class="order-contact-container">
+                        <sam-order-contact [contact]="soldToContact" (selected)="soldToContactSelected($event)">
+                        </sam-order-contact>
+                        <!-- <sam-find-contact #findContact (selected)="soldToContactSelected($event)"></sam-find-contact>
+                        <div>
+                            <button mat-raised-button color="accent" (click)="addContact()">
+                                <mat-icon>add</mat-icon>
+                                {{ 'CONTACTS.ADD_CONTACT' | translate }}
+                            </button>
+                        </div>
+                        <sam-contact-view [contact]="soldToContact"></sam-contact-view> -->
+                    </div>
                     <div class="buttons-container">
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext>Next</button>
+                        <button class="backButton" mat-stroked-button matStepperPrevious>Back</button>
+                        <button mat-raised-button color="primary" matStepperNext>Next</button>
                     </div>
                 </form>
             </mat-step>
             <mat-step [stepControl]="secondFormGroup">
                 <ng-template matStepLabel>{{'ORDERS.SHIP_TO' | translate }}</ng-template>
                 <form [formGroup]="secondFormGroup">
-                    <sam-find-contact #findContact (selected)="shipToContactSelected($event)"></sam-find-contact>
+                    <div class="order-contact-container">
+                        <sam-order-contact [contact]="shipToContact" (selected)="shipToContactSelected($event)">
+                        </sam-order-contact>
+                    </div>
+                    <!-- <sam-find-contact #findContact (selected)="shipToContactSelected($event)"></sam-find-contact>
                     <sam-contact-view [contact]="shipToContact"></sam-contact-view>
                     <button mat-raised-button color="accent" (click)="addContact()">
                         <mat-icon>add</mat-icon>
                         {{ 'CONTACTS.ADD_CONTACT' | translate }}
-                    </button>
+                    </button> -->
                     <div class="buttons-container">
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext>Next</button>
+                        <button class="backButton" mat-stroked-button matStepperPrevious>Back</button>
+                        <button mat-raised-button color="primary" matStepperNext>Next</button>
                     </div>
                 </form>
             </mat-step>
             <mat-step [stepControl]="secondFormGroup">
                 <ng-template matStepLabel>{{'ORDERS.BILL_TO' | translate }}</ng-template>
                 <form [formGroup]="secondFormGroup">
-                    <sam-find-contact #findContact (selected)="billToContactSelected($event)"></sam-find-contact>
+                    <div class="order-contact-container">
+                        <sam-order-contact [contact]="billToContact" (selected)="billToContactSelected($event)">
+                        </sam-order-contact>
+                    </div>
+                    <!-- <sam-find-contact #findContact (selected)="billToContactSelected($event)"></sam-find-contact>
                     <sam-contact-view [contact]="billToContact"></sam-contact-view> 
                     <button mat-raised-button color="accent" (click)="addContact()">
                         <mat-icon>add</mat-icon>
                         {{ 'CONTACTS.ADD_CONTACT' | translate }}
-                    </button>
+                    </button> -->
                     <div class="buttons-container">
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext>Next</button>
+                        <button class="backButton" mat-stroked-button matStepperPrevious>Back</button>
+                        <button mat-raised-button color="primary" matStepperNext>Next</button>
                     </div>
                 </form>
             </mat-step>
             <mat-step>
                 <ng-template matStepLabel>Done</ng-template>
-                <p>Confirm Order</p>
-                <button mat-raised-button color="accent" (click)="confirmOrder()">
-                    <mat-icon>checkmark</mat-icon>
-                    {{ 'ORDERS.CONFIRM_ORDER' | translate }}
-                </button>
+                <div class="confirm-container">
+                    <p>Verify and place your order</p>
+                    <button mat-raised-button color="primary" [disabled]="working" (click)="confirmOrder()">
+                        <mat-icon>checkmark</mat-icon>
+                        {{ 'ORDERS.CONFIRM_ORDER' | translate }}
+                    </button>
 
+
+                </div>
+                <div class="working" *ngIf="working">
+                    <span>Placing order... please wait</span>
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
                 <div class="buttons-container">
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
+                    <button mat-button [disabled]="working" matStepperPrevious>Back</button>
+                    <button mat-raised-button color="primary" [disabled]="working"
+                        (click)="stepper.reset()">Reset</button>
                 </div>
             </mat-step>
         </mat-stepper>

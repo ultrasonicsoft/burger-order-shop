@@ -1,0 +1,8 @@
+<div class="container">
+    <sam-find-contact #findContact (selected)="selected.emit($event)"></sam-find-contact>
+    <sam-contact-view [contact]="contact"></sam-contact-view> 
+    <button mat-raised-button color="accent" (click)="addContact()">
+        <mat-icon>add</mat-icon>
+        {{ 'CONTACTS.ADD_CONTACT' | translate }}
+    </button>
+</div>

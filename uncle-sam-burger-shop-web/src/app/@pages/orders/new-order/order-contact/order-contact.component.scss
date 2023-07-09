@@ -1,10 +1,11 @@
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
 
-    mat-form-field {
-        width: 50%;
-    }
+    sam-find-contact {
+        width: 100%;
+      }
 }

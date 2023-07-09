@@ -19,8 +19,9 @@ export class AppErrorHandler implements ErrorHandler {
         // do something with the exception
         // TODO: Call telemetry api like NewRelic or something to capture the error metrics
         if (error instanceof HttpErrorResponse) {
-            console.error('🔥 error ', JSON.stringify(error));
+            console.error('🔥 error ', error);
         } else {
+            console.error('🔥 error ', error);
             this.openSnackBar(error)
         }
 

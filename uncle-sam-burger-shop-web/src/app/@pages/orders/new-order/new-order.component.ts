@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
 import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,7 +12,7 @@ import { NewOrderState } from 'src/app/@states/new-order.state';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { Item, OrderEntry, To } from 'src/app/@models/order-entry.model';
-import { Observable, Subscriber, Subscription } from 'rxjs';
+import { Observable, Subscriber, Subscription, catchError, finalize, tap, throwError } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ItemViewComponent } from './item-view/item-view.component';
@@ -23,6 +23,10 @@ import { ContactsState } from 'src/app/@states/contacts.state';
 import { ContactViewComponent } from '../../contacts/contact-view/contact-view.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { OrdersService } from 'src/app/@services/orders.service';
+import { OrderContactComponent } from './order-contact/order-contact.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'sam-new-order',
@@ -40,11 +44,14 @@ import { OrdersService } from 'src/app/@services/orders.service';
     NgFor,
     AsyncPipe,
     ItemViewComponent,
-    FindContactComponent,
-    ContactViewComponent,
+    OrderContactComponent,
     NgIf,
     OrderSummaryComponent,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
+    RouterModule,
+
   ],
   templateUrl: './new-order.component.html',
   styleUrls: ['./new-order.component.scss'],
@@ -62,16 +69,20 @@ export class NewOrderComponent {
   @Select(NewOrderState.items)
   items$!: Observable<Item[]>;
 
-  @ViewChild('findContact', { static: false }) findContact!: FindContactComponent;
 
   soldToContact!: ContactEntry;
   shipToContact!: ContactEntry;
   billToContact!: ContactEntry;
 
+  working = false;
+
   emitter = inject(EmitterService);
   store = inject(Store);
   dialog = inject(MatDialog);
   ordersService = inject(OrdersService);
+  snackBar = inject(MatSnackBar);
+  router = inject(Router);
+  cd = inject(ChangeDetectorRef);
 
   subscription = new Subscription();
 
@@ -113,31 +124,31 @@ export class NewOrderComponent {
     this.emitter.action(NewOrderState.setBillTo).emit(billTo as any);
   }
 
-  addContact(): void {
-    const dialogRef = this.dialog.open(AddContactComponent, {
-      // data: {name: this.name, animal: this.animal},
-    });
-
-    dialogRef.afterClosed().subscribe((contact: ContactEntry) => {
-      console.log('The contact dialog was closed', contact);
-      if (contact) {
-        this.findContact.refresh();
-
-      }
-      // if (newItem) {
-      //   this.emitter.action(NewOrderState.addItem).emit(newItem as any);
-      // }
-    });
-  }
-
   confirmOrder(): void {
+    this.working = true;
+    this.cd.detectChanges();
     const newOrder: OrderEntry = this.store.selectSnapshot(NewOrderState);
     if (newOrder) {
       this.subscription.add(
-        this.ordersService.placeOrder(newOrder).subscribe((savedOrder: OrderEntry) => {
-          console.debug('🔥 order created', savedOrder);
-        }));
+        this.ordersService.placeOrder(newOrder)
+          .pipe(
+            tap((savedOrder: OrderEntry) => {
+              console.debug('🔥 order created', savedOrder);
+              this.showMessage('Order Placed: ' + newOrder.id, 'Close');
+              this.router.navigateByUrl('/orders');
+            }),
+            catchError((err) => {
+              return throwError(() => new Error('Could not place order...please try again', err))
+            }),
+            finalize(() => {
+              this.working = false;
+            })
+          ).subscribe());
     }
+  }
+
+  showMessage(message: string, action: string) {
+    this.snackBar.open(message, action, { duration: 2000 });
   }
 
   ngOnDestroy() {

@@ -17,11 +17,17 @@
   flex-direction: row;
   justify-content: flex-end;
 }
+
 .add-item-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100px;
+}
+
+.order-contact-container {
+  width: 100%;
+  margin-top: 2rem;
 }
 
 .items-containers {
@@ -39,15 +45,44 @@
   align-items: center;
 
   .item-name {
-      margin-right: 3rem;
+    margin-right: 3rem;
   }
 
   .quantity {
-      margin-right: 2rem;
+    margin-right: 2rem;
   }
 }
 
 .order-summary {
   display: flex;
   justify-content: flex-end;
+}
+
+.backButton {
+  margin-right: 1rem;
+}
+
+sam-order-contact {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.confirm-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.working {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  span {
+    margin-bottom: 2rem;
+  }
 }
