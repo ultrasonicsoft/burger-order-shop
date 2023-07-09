@@ -3,6 +3,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { OrderListComponent } from './order-list/order-list.component';
 
 @Component({
   selector: 'sam-orders',
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     RouterModule,
+    OrderListComponent
   ],
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss'],

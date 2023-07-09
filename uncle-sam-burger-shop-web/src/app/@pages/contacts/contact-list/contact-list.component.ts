@@ -29,7 +29,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   ],
 
 })
-export class ContactListComponent implements AfterViewInit, OnDestroy {
+export class ContactListComponent implements  OnDestroy {
   displayedColumns: string[] = ['firstName', 'lastName', 'houseNumber', 'streetAddress', 'zip', 'city'];
   dataSource!: MatTableDataSource<ContactEntry>;
 
@@ -65,10 +65,6 @@ export class ContactListComponent implements AfterViewInit, OnDestroy {
 
       })
     ).subscribe());
-  }
-
-  ngAfterViewInit() {
-
   }
 
   loadNext(page: PageEvent): void {

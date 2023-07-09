@@ -21,4 +21,18 @@ export class OrdersState {
         { payload }: EmitterAction<OrderEntry[]>) {
         setState(payload);
     }
+
+    @Receiver()
+    static loadNext(
+        { setState, getState }: StateContext<OrderEntry[]>,
+        { payload }: EmitterAction<OrderEntry[]>) {
+        const orders = [...getState() || []];
+        orders.push(...orders);
+        setState(payload);
+    }
+
+    @Receiver()
+    static reset({ setState }: StateContext<OrderEntry[]>) {
+        setState([]);
+    }
 }

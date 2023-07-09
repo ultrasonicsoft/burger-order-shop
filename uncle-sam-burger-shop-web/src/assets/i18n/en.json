@@ -11,7 +11,10 @@
         "SHIP_TO": "Ship To",
         "BILL_TO": "Bill To",
         "ADD_ITEM": "Add Item",
-        "CONFIRM_ORDER": "Confirm Order"
+        "CONFIRM_ORDER": "Confirm Order",
+        "ID": "ID",
+        "ORDER_DATE": "Order Date",
+        "ORDER_VALUE": "Order Value"
     },
     "CONTACTS": {
         "ADD_CONTACT": "Add Contact",

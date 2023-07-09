@@ -18,11 +18,10 @@ export class ContactsService {
   }
 
   getTotalContacts(): Observable<number> {
-    return this.http.get<number>(ENDPOINTS.CONTACTS.getTotalContacts()).pipe(map((response: any) => response.personCount))
+    return this.http.get<number>(ENDPOINTS.CONTACTS.getCount()).pipe(map((response: any) => response.personCount))
   }
 
   loadNext(pageIndex: number, pageSize = AppConfig.PageSize): Observable<ContactEntry[]> {
-
     return this.http.get<ContactEntry[]>(ENDPOINTS.CONTACTS.getContacts(pageIndex, pageSize));
   }
 
