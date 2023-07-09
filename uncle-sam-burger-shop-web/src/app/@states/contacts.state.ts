@@ -29,4 +29,18 @@ export class ContactsState {
         { payload }: EmitterAction<ContactEntry[]>) {
         setState(payload);
     }
+
+    @Receiver()
+    static loadNext(
+        { setState, getState }: StateContext<ContactEntry[]>,
+        { payload }: EmitterAction<ContactEntry[]>) {
+        const contacts = [...getState() || []];
+        contacts.push(...contacts);
+        setState(payload);
+    }
+
+    @Receiver()
+    static reset({ setState }: StateContext<ContactEntry[]>) {
+        setState([]);
+    }
 }

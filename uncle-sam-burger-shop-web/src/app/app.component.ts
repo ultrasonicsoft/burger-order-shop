@@ -49,20 +49,13 @@ export class AppComponent implements OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.loadContacts();
     this.loadBurgers();
 
     this.orderService.getOrders().subscribe((response: any) => {
       console.debug('🔥 orders response', response);
     });
   }
-
-  private loadContacts(): void {
-    this.subscription.add(this.contactsService.getContacts().subscribe((contacts: ContactEntry[]) => {
-      console.debug('🔥 contacts response', contacts);
-      this.emitter.action(ContactsState.setAll).emit(contacts as any);
-    }));
-  }
+  
 
   private loadBurgers(): void {
     this.subscription.add(this.burgerService.getBurgers().subscribe((burgers: BurgerEntry[]) => {
