@@ -1,30 +1,6 @@
-# Celonis Programming Challenge: Frontend Specialist
-
-Dear applicant,
-
-Congratulations, you made it to the Celonis Programming Challenge!
-
-Why do we ask you to complete this challenge?
-
-First of all, we need to have some way of comparing different applicants, and we try to answer certain questions which we can not out-right ask in an interview - also we don't want to ask too many technical questions in a face-to-face interview to not be personally biased in a potentially stressful situation. To be as transparent as possible, we want to give you some insights into what we look at and how we evaluate. This challenge gives you the possibility to shine :). Impress us with **simplicity**, understanding of your own solution and of course **working code**.
+# Frontend Specialist - Programming Challenge
 
 ## Challenge
-
-The following challenge has to be solved. You will find specific tasks and deliverables in the subsequent sections.
-
-Note that there is nothing wrong with googling when you have certain questions or are unsure about some APIs, but you should not outright copy code that you don't understand. If you decide to copy code, please mark it as copied citing the source.
-
-## Challenge: Implementation
-
-What we are looking into:
-
-- Clean, simple and understandable code 
-- Analytical / problem-understanding / problem-solving skills
-- Ability to execute / implement 
-- Ability to explain why you picked a certain solution and why you rejected possible alternatives
-- Ability to challenge proposed solutions (business wise and technically) and identify more efficient or better ways forward
-
-
 ## Task 1: Get the sample application "Up and Running"
 
 The sample application are two very simple microservices that manage persons/contacts and orders. The services are "dockerized" and come with a [docker-compose file](docker-compose.yaml) that helps you set it up quickly. To run it you need docker (incl. compose) and an internet connection. 
@@ -48,7 +24,7 @@ Congrats! Now you are ready to begin the actual development work!
 
 ## Task 2: Create a Frontend
 
-In this task you can excite us with your frontend skills. Build a frontend for the 2 services that let users capture orders for contacts. Since the 2 services are not integrated in the backend, you need to ensure consistency on the frontend side. You are entirely free in your technology choices, css styles, etc. However we expect you to reason about them. 
+Build a frontend for the 2 services that let users capture orders for contacts. Since the 2 services are not integrated in the backend, you need to ensure consistency on the frontend side. You are entirely free in your technology choices, css styles, etc. However we expect you to reason about them. 
 
 Since we enjoy good and robust designs, the services by default don't support [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing). However you can switch it on by setting `--spring.profiles.active=CORS` on both services on the [compose file](docker-compose.yaml).  
 
@@ -78,20 +54,3 @@ Should you have enabled CORS for development purposes, this is the time to disab
 
 You can also take a step back and think how you would serve your UI in a cloud environment like AWS, Azure or GCP. This is also a good talking point for the interview.
 
-
-## Task 5: Presentation
-
-Congratulations you have completed the technical part of your challenge. Now you need to sell it to us ;-). For that we would expect the following to be handed in once your deadline is expired:
-
-* Word document summary 3-4 pages max. highlighting: Architecture ([original architecture is available as drawio](assets/Architecture.drawio)), choices made and reasons, proposed improvements, what worked and what not, etc.
-* Complete Source Code 
-* Amended docker-compose file (to re-create your setup on our own infrastructure)
-
-**Please send back your solution as git repository (including .git folder) packed as zip archive. (e.g. by creating a dropbox / Google Drive or similar link to avoid issues when sending via email)**
-
-During the meeting we would follow the below structure:
-
-* Demo of your Solution: Be creative and entertain us
-* Joint discussion of your previously handed-in word document
-* Presentation of your source code structure with questions and answers
-* Open Questions that will mainly ask you for reasons of choices you made (framework, css, etc.). It is very important to be honest here. If you picked Angular as a framework because it is the only one you know, don't make up things just say it. 
